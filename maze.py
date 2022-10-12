@@ -6,7 +6,7 @@ class Maze:
 
     def generate_grid(self):
         blocked_grid = self.generate_dfs()
-        blocked_grid[0][0], blocked_grid[-1][-1] = True, True
+        blocked_grid[0][0], blocked_grid[-1][-1] = False, False
         grid = [[Cell(i, j, blocked_grid[i][j]) for j in range(self.dimension)] for i in range(self.dimension)]
         return grid 
     
@@ -15,16 +15,21 @@ class Maze:
         grid = np.random.rand(self.dimension, self.dimension)
         visited = np.full(grid.shape, False)
         final_grid = np.full(grid.shape, False)
+        
         stack = []
         stack.append({'x':0, 'y':0})
+        
         while stack:
             last = stack.pop()
             x, y = last['x'], last['y']
+            
             if visited[last['x']][last['y']]:
                 continue
+            
             visited[x][y] = True
             if np.random.rand() <= self.probability:
                 final_grid[x][y] = True
+            
             if y - 1 >= 0:
                 stack.append({'x': x, 'y': y - 1})
             if y + 1 < len(grid):
