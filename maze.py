@@ -1,4 +1,5 @@
 import numpy as np
+
 class Maze:
     def __init__(self, dimension, probability):
         self.dimension = dimension
@@ -7,6 +8,7 @@ class Maze:
     def generate_grid(self):
         blocked_grid = self.generate_dfs()
         blocked_grid[0][0], blocked_grid[-1][-1] = False, False
+        
         grid = [[Cell(i, j, blocked_grid[i][j]) for j in range(self.dimension)] for i in range(self.dimension)]
         return grid 
     
@@ -42,7 +44,7 @@ class Maze:
         return final_grid
 
 class Cell:
-    def ___init__(self, x, y, block):
+    def __init__(self, x, y, block):
         self.x = x
         self.y = y
         self.block = block
@@ -50,6 +52,4 @@ class Cell:
         self.h = 0 # h value of the cell (estimated value of the distance between curr cell and goal cell)
         self.f = 0 # f value of the cell (f = g+h in A*, defines the priority of a node)
 
-
     
-        
