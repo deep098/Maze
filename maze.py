@@ -10,7 +10,7 @@ class Maze:
         blocked_grid[0][0], blocked_grid[-1][-1] = False, False
         
         grid = [[Cell(i, j, blocked_grid[i][j]) for j in range(self.dimension)] for i in range(self.dimension)]
-        return grid 
+        return grid
     
     
     def generate_dfs(self):
@@ -51,5 +51,8 @@ class Cell:
         self.g = 0 # g value of the cell (the distance from start cell to curr cell)
         self.h = 0 # h value of the cell (estimated value of the distance between curr cell and goal cell)
         self.f = 0 # f value of the cell (f = g+h in A*, defines the priority of a node)
+    
+    def __lt__(self, other):
+        return self.f < other.f
 
     
