@@ -2,12 +2,10 @@ import heapq
 from maze import Maze, Cell
 STEP = 1
 class AStar(Maze, Cell):
-    def __init__(self):
+    def __init__(self, dim, probability):
         self.opened = []
         heapq.heapify(self.opened)
         self.closed = set()
- 
-    def init_grid(self, dim, probability):
         self.dim = dim
         self.cells = Maze(dim, probability).generate_grid()
         self.start = self.cells[0][0]
@@ -87,8 +85,7 @@ class AStar(Maze, Cell):
                         heapq.heappush(self.opened, (adj_cell.f, adj_cell))
 
 if __name__ == '__main__':
-    star = AStar()
-    star.init_grid(5, 0.3)
+    star = AStar(101, 0.3)
     path = star.solve()
     print(path)
     # import pdb;pdb.set_trace()
